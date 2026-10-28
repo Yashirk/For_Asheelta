@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Asheelta ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0d0614 0%, #1a0b2e 50%, #2a0826 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 15px;
+        }
+
+        /* Ambient Stars & Hearts Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Romantic Glow Accents */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            width: 300px;
+            height: 300px;
+            background: #ff4081;
+            top: -50px;
+            left: -50px;
+        }
+
+        .glow-2 {
+            width: 350px;
+            height: 350px;
+            background: #9c27b0;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        /* Main Container Card */
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+            border-radius: 24px;
+            padding: 26px 20px;
+            max-width: 560px;
+            width: 100%;
+            z-index: 10;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        /* Custom Vinyl Music Widget */
+        .music-widget {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 117, 151, 0.3);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .vinyl-disc {
+            width: 42px;
+            height: 42px;
+            background: radial-gradient(circle, #111 30%, #ff416c 31%, #ff416c 35%, #111 36%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            animation: spin 3s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .vinyl-disc.playing {
+            animation-play-state: running;
+        }
+
+        .vinyl-center {
+            width: 12px;
+            height: 12px;
+            background: #ffd1dc;
+            border-radius: 50%;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .music-meta span {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .music-meta small {
+            font-size: 0.74rem;
+            color: #ffd1dc;
+        }
+
+        .music-play-btn {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .subtle-quote {
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.5px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .heading {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #ff7597;
+            margin-bottom: 14px;
+            text-shadow: 0 0 10px rgba(255, 117, 151, 0.3);
+        }
+
+        .message {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.92);
+            font-weight: 300;
+            text-align: justify;
+            text-align-last: center;
+            margin-bottom: 18px;
+        }
+
+        .scenery-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.74rem;
+            color: #ffd1dc;
+            margin: 10px 0 16px 0;
+            display: inline-block;
+        }
+
+        /* Buttons Layout - Side by Side */
+        .btn-wrapper {
+            position: relative;
+            height: 65px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background 0.3s ease;
+            outline: none;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
+            z-index: 12;
+        }
+
+        .btn-yes:hover, .btn-yes:active {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(255, 65, 108, 0.6);
+        }
+
+        .btn-no {
+            background: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 11;
+            white-space: nowrap;
+            touch-action: none;
+        }
+
+        /* Page 2 - Celebration View */
+        .celebration-view {
+            display: none;
+            opacity: 0;
+            transform: scale(0.92);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .celebration-view.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .celebration-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.6rem;
+            color: #ff6b8b;
+            margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        .celebration-text {
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: #ffffff;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .footer-note {
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-top: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px 14px;
+            }
+            .heading {
+                font-size: 1.9rem;
+            }
+            .message {
+                font-size: 0.87rem;
+            }
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GitHub Hosted Audio Stream -->
+    <audio id="bgSong" loop preload="auto">
+        <source src="YOUR_GITHUB_RAW_AUDIO_LINK_HERE" type="audio/mp3">
+    </audio>
+
+    <canvas id="particleCanvas"></canvas>
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+
+    <div class="card" id="mainCard">
+        <!-- PAGE 1: Initial Question -->
+        <div id="page1">
+            <!-- Custom Vinyl Player Widget -->
+            <div class="music-widget">
+                <div class="music-left">
+                    <div class="vinyl-disc" id="vinylDisc">
+                        <div class="vinyl-center"></div>
+                    </div>
+                    <div class="music-meta">
+                        <span>Ordinary</span>
+                        <small>Alex Warren</small>
+                    </div>
+                </div>
+                <button class="music-play-btn" id="playToggleBtn" onclick="togglePlay()">Play 🎶</button>
+            </div>
+
+            <p class="subtle-quote">✨ no matter how beautiful the scenery is, you'll always be the most beautiful one ✨</p>
+            <h1 class="heading">For Asheelta...</h1>
+            
+            <p class="message">
+                Asheelta you make me happy, you're an amazing woman, you're kind, caring and CRAZY BEAUTIFUL, iam sorry for anythingive done that hurt you i really am and i promise to keep improving myself. You are the only woman i want no matter what you say I'll always be there for you ill wait as long as it takes even if you're feeling dont get sorted out ill be there with you i want to hold your hand i want to give you all my love and i also want to get all your love and ill stay by your side even after death. Asheelta I Love You. Will you try your best to get throughwhat you'regoing through and love me too?
+            </p>
+
+            <div class="scenery-badge">
+                🌸 Forever Yours 🌸
+            </div>
+
+            <div class="btn-wrapper" id="btnWrapper">
+                <button class="btn btn-yes" id="yesBtn" onclick="handleYesClick()">Yes ❤️</button>
+                <button class="btn btn-no" id="noBtn">No</button>
+            </div>
+        </div>
+
+        <!-- PAGE 2: Celebration -->
+        <div id="page2" class="celebration-view">
+            <h1 class="celebration-title">YAYY! 💖✨</h1>
+            <p class="celebration-text">
+                YAYY I PROMISE TO LOVE YOU AND BE YOURS FOREVER WE'LLFACE THE WORLD TOGETHER AND I PROMISE YOU THAT ILL ALWAYS BE BY YOUR SIDE AS YOUR MAN. I TRULY LOVE YOU SO MUCH
+            </p>
+
+            <div class="scenery-badge">
+                🌌 Side by side, always & forever 🌌
+            </div>
+
+            <p class="footer-note">✨ every moment with you is my favorite view ✨</p>
+        </div>
+    </div>
+
+    <script>
+        const song = document.getElementById('bgSong');
+        const playToggleBtn = document.getElementById('playToggleBtn');
+        const vinylDisc = document.getElementById('vinylDisc');
+        let isPlaying = false;
+
+        function togglePlay() {
+            if (!isPlaying) {
+                song.play().then(() => {
+                    isPlaying = true;
+                    playToggleBtn.innerText = "Pause ⏸";
+                    playToggleBtn.style.background = "rgba(255,255,255,0.2)";
+                    vinylDisc.classList.add('playing');
+                }).catch(err => {
+                    console.log("Playback prevented:", err);
+                });
+            } else {
+                song.pause();
+                isPlaying = false;
+                playToggleBtn.innerText = "Play 🎶";
+                playToggleBtn.style.background = "linear-gradient(135deg, #ff416c, #ff4b2b)";
+                vinylDisc.classList.remove('playing');
+            }
+        }
+
+        /* Floating Stars & Hearts Particles */
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 20;
+                this.size = Math.random() * 12 + 8;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.isHeart = Math.random() > 0.4;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -20) this.reset();
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                if (this.isHeart) {
+                    ctx.fillStyle = '#ff7597';
+                    ctx.font = `${this.size}px serif`;
+                    ctx.fillText('❤️', this.x, this.y);
+                } else {
+                    ctx.fillStyle = '#ffd700';
+                    ctx.font = `${this.size * 0.8}px serif`;
+                    ctx.fillText('✨', this.x, this.y);
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 30; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        /* "No" Button Evasion Logic */
+        const noBtn = document.getElementById('noBtn');
+        let moveCount = 0;
+
+        const playfulTexts = [
+            "No",
+            "Are you sure? 🥺",
+            "Think again! ✨",
+            "Can't catch me! 😜",
+            "Try clicking Yes! ❤️",
+            "Still running! 💖",
+            "Always going to be Yes! 💕"
+        ];
+
+        function evadeButton(e) {
+            if (e) e.preventDefault();
+            
+            const xOffset = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 120 + 70);
+            const yOffset = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 80 + 40);
+
+            noBtn.style.position = 'relative';
+            noBtn.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+
+            moveCount++;
+            noBtn.innerText = playfulTexts[moveCount % playfulTexts.length];
+        }
+
+        noBtn.addEventListener('mouseenter', evadeButton);
+        noBtn.addEventListener('touchstart', evadeButton);
+        noBtn.addEventListener('click', evadeButton);
+
+        /* Page Transition on "Yes" */
+        function handleYesClick() {
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+
+            page1.style.display = 'none';
+            page2.classList.add('active');
+
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    let p = new Particle();
+                    p.y = window.innerHeight / 2;
+                    p.x = window.innerWidth / 2;
+                    p.speedY = (Math.random() - 0.5) * 5;
+                    p.speedX = (Math.random() - 0.5) * 5;
+                    p.size = Math.random() * 22 + 14;
+                    particles.push(p);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>
